@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Salón Marfil · Peluquería y barbería en Valencia (demo)</title>
+<meta name="description" content="Demo de web para peluquerías y barberías: cada servicio con su ficha (tiempo, precio de ejemplo y cada cuánto vuelves) y una libreta de citas. Negocio ficticio creado por MesaWeb Studio.">
+<meta property="og:title" content="Salón Marfil · El fichero (demo de MesaWeb Studio)">
+<meta property="og:description" content="Saca la ficha de tu corte: cuánto estás en el sillón, cuánto cuesta y cada cuánto vuelves. Negocio ficticio.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta name="theme-color" content="#141210">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%23141210'/%3E%3Crect x='6' y='10' width='20' height='15' fill='%23EFE8DA'/%3E%3Crect x='6' y='6' width='8' height='5' fill='%23D98A52'/%3E%3Cpath d='M6 14h20' stroke='%239A4A22'/%3E%3C/svg%3E">
+<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
+<style>
+:root{--negro:#141210;--negro2:#1C1916;--linea:#3A332C;--marfil:#EDE6D8;--suave:#BDB3A4;--cobre:#D98A52;--laton:#8E7E62;
+--carta:#EFE8DA;--tinta:#1E1A16;--raya:#D6CCB9;--rojo:#8F4220;--boli:#24408E;--gris:#4E463D;
+--ka:#9A4A22;--kl:#7F8E99;--kc:#1E1A16;--ks:#6B5A48;
+--din:Bahnschrift,"DIN Alternate","DIN Next","Avenir Next Condensed","Roboto Condensed","Arial Narrow",sans-serif-condensed,sans-serif;--txt:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--mono:ui-monospace,"Cascadia Mono",Consolas,Menlo,monospace;--ease:cubic-bezier(.16,1,.3,1);
+--nogal:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .09' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .24 0 0 0 0 .15 0 0 0 0 .09 0 0 0 1.3 -.35'/%3E%3C/filter%3E%3Crect width='480' height='240' fill='%232A1C13'/%3E%3Crect width='480' height='240' filter='url(%23f)'/%3E%3C/svg%3E");
+--acero:linear-gradient(180deg,#8D9094,#5E6165 48%,#74777B 52%,#4C4F53)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-color:var(--linea) var(--negro);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--negro);color:var(--marfil);font:16px/1.6 var(--txt);caret-color:var(--cobre);overflow-x:hidden}
+::selection{background:var(--cobre);color:var(--negro)}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--cobre);text-underline-offset:3px}
+h1,h2,h3{font-family:var(--din);font-stretch:75%;line-height:.96;letter-spacing:-.005em;margin:0;text-wrap:balance;text-transform:uppercase;font-weight:700}
+h2{font-size:clamp(2.2rem,6vw,4.2rem)}
+p{margin:0 0 1em}
+.w{max-width:1180px;margin:0 auto;padding:0 16px}
+[id]{scroll-margin-top:80px}
+:focus-visible{outline:3px solid var(--cobre);outline-offset:2px}
+.ficha :focus-visible,.pag :focus-visible{outline-color:var(--boli)}
+.skip{position:absolute;left:8px;top:-60px;background:var(--cobre);color:var(--negro);padding:12px 16px;z-index:9;font-weight:700}
+.skip:focus{top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border:2px solid var(--cobre);background:var(--cobre);color:var(--negro);font:700 1.05rem/1.15 var(--din);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:2px;padding-top:10px;padding-bottom:10px;text-align:center;transition:transform .2s var(--ease),background .2s,color .2s}
+.btn:hover{background:var(--marfil);border-color:var(--marfil)}
+.btn:active{transform:translateY(1px)}
+.btn.os{background:var(--tinta);border-color:var(--tinta);color:var(--carta)}
+.btn.os:hover{background:var(--boli);border-color:var(--boli)}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.ej{font-size:.8em;font-weight:700}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cap{font:700 .8rem/1.3 var(--din);letter-spacing:.05em;text-transform:uppercase}
+/* barra */
+.bar{background:rgba(20,18,16,.96);border-bottom:1px solid var(--linea);position:relative;z-index:5}
+.bar .w{display:flex;align-items:center;gap:8px 16px;min-height:64px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.marca{font:700 1.5rem/1 var(--din);font-stretch:75%;color:var(--marfil);text-decoration:none;text-transform:uppercase;letter-spacing:.04em;display:flex;gap:10px;min-height:44px;align-items:center}
+.marca span{font:400 .8rem/1.2 var(--txt);color:var(--suave);text-transform:none;letter-spacing:0}
+.hoy{font-size:.85rem;color:var(--suave);margin:0;flex:1 1 220px;min-height:1.4em}
+.hoy b{color:var(--marfil)}
+.hx{display:none}
+.bar .btn{min-height:44px;padding:0 18px;font-size:.95rem}
+/* portada */
+.port{position:relative;padding:32px 0 0;background:radial-gradient(60% 50% at 72% 18%,rgba(217,138,82,.16),transparent 70%)}
+.cab{display:grid;gap:24px;align-items:end;margin-bottom:32px}
+.cab h1{font-size:clamp(3rem,11vw,7.4rem);color:var(--marfil)}
+.cab h1 em{font-style:normal;color:var(--cobre)}
+.cab p{max-width:44ch;font-size:1.08rem;color:var(--suave);margin:20px 0 0}
+.foto{margin:0;position:relative}
+.foto img{width:100%;aspect-ratio:21/9;object-fit:cover;object-position:50% 30%}
+.foto figcaption{font-size:.78rem;color:var(--suave);margin-top:8px}
+/* cajon de nogal */
+.cajon{position:relative;background:var(--nogal) #2A1C13;padding:20px 12px 0;border-radius:3px 3px 0 0;box-shadow:inset 0 1px 0 rgba(255,220,180,.12),0 30px 60px rgba(0,0,0,.5)}
+.placa{position:relative;display:inline-block;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px),linear-gradient(180deg,#55585C,#3F4245 55%,#4A4D51);border:1px solid #8D9094;color:#F4F4F2;font:700 .8rem/1 var(--din);letter-spacing:.05em;text-transform:uppercase;padding:10px 24px;border-radius:2px;margin:0 0 18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 2px 4px rgba(0,0,0,.7);text-shadow:0 1px 0 rgba(0,0,0,.6)}
+.placa:before,.placa:after{content:"";position:absolute;top:50%;margin-top:-3.5px;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#D6D9DC,#3A3D40)}
+.placa:before{left:7px}.placa:after{right:7px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px 6px;position:relative;z-index:2;margin-bottom:6px;padding-bottom:10px}
+.tab{min-height:56px;border:1px solid #CFC4AF;border-radius:4px;padding:8px 12px;text-align:left;font:700 1rem/1.05 var(--din);font-stretch:75%;text-transform:uppercase;color:var(--tinta);cursor:pointer;background:#D9D0BE;transition:transform .3s var(--ease),background .2s}
+.tab small{display:block;font:500 .74rem/1.2 var(--mono);text-transform:none;margin-top:4px;color:var(--gris)}
+.tab:nth-child(3n+1){--o:0px}.tab:nth-child(3n+2){--o:7px}.tab:nth-child(3n){--o:14px}
+.tab{transform:translateY(var(--o))}
+.tab:hover{background:var(--carta);transform:translateY(calc(var(--o) - 3px))}
+.tab[aria-selected=true]{transform:translateY(-4px)}
+.tab[aria-selected=true]{background:var(--carta);box-shadow:inset 0 -5px 0 var(--cobre)}
+.ficha{position:relative;z-index:2;background:var(--carta);color:var(--tinta);padding:20px 18px 28px;background-image:linear-gradient(transparent 0 35px,var(--raya) 35px 36px);background-size:100% 36px;background-position:0 64px;box-shadow:0 14px 30px rgba(0,0,0,.45)}
+.ficha.sale{animation:sale .5s var(--ease)}
+@keyframes sale{from{transform:translateY(24px) rotate(-.4deg)}to{transform:none}}
+.fh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:2px solid var(--rojo);padding-bottom:8px;margin-bottom:14px;color:var(--rojo);background:var(--carta)}
+.sello{position:absolute;right:16px;top:46px;border:2px solid var(--rojo);color:var(--rojo);padding:7px 10px;transform:rotate(-7deg);background:var(--carta)}
+.ficha .ft{font-size:clamp(2rem,5.6vw,3.2rem);color:var(--boli);margin:0 0 12px;padding-right:110px}
+.cols{display:grid;gap:8px 40px}
+dl{margin:0}
+.fila{display:grid;grid-template-columns:8.5em 1fr;gap:12px;padding:6px 0;border-bottom:1px dotted #A99C86}
+.fila dt{color:var(--gris);padding-top:3px}
+.fila dd{margin:0;color:var(--boli);font-weight:600}
+.fila dd.mono{font-weight:500;font-size:.95rem}
+.lbl{color:var(--gris);margin:18px 0 8px}
+.tira{display:flex;height:34px;border:1.5px solid var(--tinta);background:var(--carta)}
+.tira span{min-width:3px;border-right:1.5px solid var(--tinta);transition:flex-grow .45s var(--ease)}
+.tira span:last-child{border-right:0}
+.ka{background:var(--ka)}.ke{background:repeating-linear-gradient(135deg,var(--carta) 0 5px,var(--ka) 5px 7px)}.kl{background:var(--kl)}.kc{background:var(--kc)}.ks{background:var(--ks)}
+.ley{display:flex;flex-wrap:wrap;gap:4px 14px;list-style:none;padding:0;margin:8px 0 0;font-size:.86rem}
+.ley li{display:flex;align-items:center;gap:6px}
+.ley i{width:14px;height:14px;border:1px solid currentColor;display:inline-block}
+.sal{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.sal select{min-height:44px;font:600 1rem var(--mono);color:var(--boli);border:1.5px solid var(--tinta);background:var(--carta);padding:0 10px;border-radius:2px}
+.sal output{font:700 1.1rem var(--mono);color:var(--boli)}
+.anio{display:grid;grid-template-columns:repeat(12,1fr);gap:2px;list-style:none;padding:0;margin:0}
+.anio li{text-align:center;font:600 .72rem/1 var(--mono);color:var(--gris);padding:6px 0 0;border-top:3px solid var(--raya)}
+.anio li.v{border-top-color:var(--boli);color:var(--boli)}
+.anio li.v:before{content:"";display:block;width:10px;height:10px;border-radius:50%;background:var(--boli);margin:-11px auto 4px}
+.anio li:not(.v):before{content:"";display:block;height:4px}
+.nota{font-size:.86rem;color:var(--gris);margin:10px 0 0}
+.fpie{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin-top:22px}
+.fpie .nota{margin:0;flex:1 1 220px}
+.frente{position:relative;height:64px;margin:0 -12px;background:var(--nogal) #2A1C13;border-top:3px solid #120C08;box-shadow:inset 0 2px 0 rgba(255,220,180,.1)}
+.asa{position:absolute;left:50%;top:14px;width:150px;height:26px;margin-left:-75px;border-radius:3px 3px 14px 14px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),linear-gradient(180deg,#A3A6AA,#6A6D71 45%,#8B8E92 55%,#4E5154);box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 4px 8px rgba(0,0,0,.7)}
+.asa:before,.asa:after{content:"";position:absolute;top:6px;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#D6D9DC,#3A3D40)}
+.asa:before{left:8px}.asa:after{right:8px}
+/* comparador */
+.sec{padding:96px 0}
+.ld{max-width:58ch;font-size:1.06rem;color:var(--suave);margin-top:18px}
+.cmp{margin:40px 0 0;padding:0;list-style:none;border-top:1px solid var(--marfil)}
+.cmp li{display:grid;grid-template-columns:1fr;gap:8px 24px;padding:16px 12px;border-bottom:1px solid var(--linea);align-items:center}
+.cmp li.on{background:linear-gradient(90deg,rgba(217,138,82,.16),transparent 75%)}
+.cmp b{font:700 1.3rem/1 var(--din);font-stretch:75%;text-transform:uppercase}
+.cmp li.on b{color:var(--cobre)}
+.cmp .dat{font-size:.9rem;color:var(--suave);margin-top:4px}
+.cmp .dat span{margin-right:14px;white-space:nowrap}
+.pista{position:relative;padding-bottom:16px;background:linear-gradient(90deg,var(--suave) 1px,transparent 1px) 0 100%/25% 8px repeat-x,linear-gradient(var(--linea),var(--linea)) 0 calc(100% - 8px)/100% 1px no-repeat}
+.pista:after{content:"";position:absolute;right:0;bottom:0;width:1px;height:8px;background:var(--suave)}
+.cmp .tira{height:20px;width:var(--w);border-color:var(--marfil);background:var(--negro)}
+.eje{display:flex;justify-content:space-between;font:.74rem var(--mono);color:var(--suave);margin:0 0 6px}
+.cmp .tira span{border-color:var(--negro)}
+.cmp .ka{background:var(--cobre)}.cmp .ke{background:repeating-linear-gradient(135deg,var(--negro) 0 5px,var(--cobre) 5px 7px)}.cmp .kc{background:var(--marfil)}.cmp .ks{background:#9C7A5B}
+.cmp button{min-height:44px;border:1px solid var(--suave);background:transparent;font:700 .9rem var(--din);letter-spacing:.04em;text-transform:uppercase;padding:0 16px;cursor:pointer;color:var(--marfil);justify-self:start;border-radius:2px}
+.cmp button:hover{background:var(--marfil);color:var(--negro)}
+.sec .ley{color:var(--marfil);margin-top:16px}
+.sec .ley .ka{background:var(--cobre)}.sec .ley .ke{background:repeating-linear-gradient(135deg,var(--negro) 0 3px,var(--cobre) 3px 5px)}.sec .ley .kc{background:var(--marfil)}.sec .ley .ks{background:#9C7A5B}
+.sec .nota{color:var(--suave)}
+/* libreta */
+.lib{padding:96px 0;background:linear-gradient(var(--negro),var(--negro2))}
+.dias{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 20px}
+.dia{min-height:52px;min-width:72px;border:1px solid var(--laton);background:transparent;color:var(--marfil);font:700 .95rem/1.1 var(--din);text-transform:uppercase;cursor:pointer;border-radius:2px;padding:6px 12px}
+.dia small{display:block;font:400 .74rem var(--mono);color:var(--suave)}
+.dia[aria-pressed=true]{background:var(--cobre);border-color:var(--cobre);color:var(--negro)}
+.dia[aria-pressed=true] small{color:var(--negro)}
+.dia:disabled{cursor:not-allowed;color:#9A9083;border-color:var(--linea);text-decoration:line-through}
+.mostr{background:var(--nogal) #2A1C13;padding:16px 12px;border-radius:3px;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.libro{display:grid;background:var(--carta);color:var(--tinta);box-shadow:0 10px 24px rgba(0,0,0,.5)}
+.pag{padding:20px 16px;background-image:linear-gradient(transparent 0 47px,var(--raya) 47px 48px);background-size:100% 48px}
+.pag+.pag{border-top:2px dashed #B5A88F}
+.ph{color:var(--rojo);border-bottom:2px solid var(--rojo);padding-bottom:8px;margin-bottom:6px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:var(--carta)}
+.horas{list-style:none;margin:0;padding:0}
+.horas li{display:grid;grid-template-columns:3.8em 1fr;align-items:stretch;border-bottom:1px solid var(--raya)}
+.horas time{font:600 .86rem/48px var(--mono);color:var(--gris)}
+.hueco{min-height:47px;border:0;background:transparent;text-align:left;font:600 .92rem var(--txt);color:var(--boli);cursor:pointer;padding:0 12px;border-left:2px solid var(--rojo)}
+.hueco:hover{background:#E4DCCB}
+.hueco.oc{color:var(--gris);cursor:not-allowed;background:#E2D9C7;font-weight:400}
+.hueco.pa{color:var(--gris);cursor:not-allowed;font-weight:400}
+.hueco.sel{background:var(--tinta);color:var(--carta);font-weight:700}
+.hueco.sel.cont{color:#BDB3A4;font-weight:400}
+.form label{display:block;color:var(--gris);margin:18px 0 6px}
+.form input,.form select{width:100%;min-height:48px;border:0;border-bottom:2px solid var(--tinta);background:transparent;font:600 1.05rem var(--txt);color:var(--boli);padding:0 12px;border-radius:0}
+.form input:focus-visible,.form select:focus-visible{outline-offset:0}
+.res{margin:18px 0;padding:12px 14px;border:1.5px dashed var(--boli);color:var(--boli);font-weight:600;min-height:3.2em;background:var(--carta)}
+.err{color:var(--rojo);font-weight:700;min-height:1.6em;margin:10px 0}
+.ok{margin-top:16px;padding:14px 16px;border:2px solid var(--rojo);background:#fff8ec}
+.ok b{display:block;color:var(--rojo);margin-bottom:6px}
+/* salon */
+.salon{display:grid;gap:32px;margin-top:40px}
+.salon figure{margin:0}
+.salon img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.salon figcaption{font-size:.8rem;color:var(--suave);margin-top:8px}
+.datos{display:grid;gap:32px}
+.datos h3{font-size:1.7rem;margin-bottom:12px;color:var(--marfil)}
+.hor{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hor th,.hor td{text-align:left;padding:10px 0;border-bottom:1px solid var(--linea);font-weight:400}
+.hor td{font-family:var(--mono);color:var(--marfil);text-align:right}
+.hor caption{caption-side:bottom;text-align:left;font-size:.86rem;color:var(--suave);padding-top:8px}
+.datos .nota{color:var(--suave)}
+.antes{list-style:none;padding:0;margin:0}
+.antes li{padding:14px 0;border-bottom:1px solid var(--linea);color:var(--suave)}
+.antes b{font:700 1.15rem/1.2 var(--din);text-transform:uppercase;display:block;color:var(--marfil);margin-bottom:4px}
+/* mesaweb */
+.mw{padding:88px 0;border-top:1px solid var(--linea);background:radial-gradient(50% 80% at 15% 0,rgba(217,138,82,.12),transparent 70%)}
+.mw h2{max-width:16ch}
+.mw p{max-width:50ch;margin:18px 0 26px;color:var(--suave)}
+.mw .btn{max-width:100%;padding:0 16px;text-transform:none;letter-spacing:0;font-size:1.1rem;overflow-wrap:anywhere}
+footer{background:#0E0C0B;color:var(--suave);padding:32px 0 40px;font-size:.88rem;border-top:1px solid var(--linea)}
+footer p{margin:0 0 6px}
+footer strong{color:var(--marfil)}
+noscript p{background:var(--cobre);color:var(--negro);padding:12px 16px;margin:0;font-weight:600}
+.idx{background:rgba(20,18,16,.97);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:5}
+.idx ul{list-style:none;margin:0 auto;padding:0 8px;max-width:1180px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.idx ul::-webkit-scrollbar{display:none}
+.idx a{display:flex;align-items:center;min-height:44px;padding:0 14px;font:700 .9rem/1 var(--din);letter-spacing:.05em;text-transform:uppercase;color:var(--suave);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
+.idx a:hover,.idx a[aria-current]{color:var(--marfil);border-bottom-color:var(--cobre)}
+.idx a:focus-visible{outline:2px solid var(--cobre);outline-offset:-4px}
+[id]{scroll-margin-top:60px}
+@media (min-width:700px){.idx{top:65px}[id]{scroll-margin-top:126px}}
+@media (min-width:700px){
+.hx{display:inline}.hm{display:none}
+.bar{position:sticky;top:0}
+.hoy{text-align:right}
+.tabs{grid-template-columns:repeat(6,1fr)}
+.cajon{padding:24px 24px 0}
+.frente{margin:0 -24px}
+.ficha{padding:26px 32px 32px}
+.cols{grid-template-columns:1fr 1fr}
+.cmp li{grid-template-columns:14em 1fr 8em}
+.salon{grid-template-columns:1fr 1.4fr}
+.datos{grid-template-columns:1fr 1fr}
+.datos>div:last-child{grid-column:1/-1}
+.mostr{padding:24px}
+}
+@media (min-width:960px){
+.cab{grid-template-columns:1.25fr 1fr;gap:48px}
+.foto img{aspect-ratio:5/4}
+.libro{grid-template-columns:1fr 1fr}
+.pag{padding:28px 32px}
+.pag+.pag{border-top:0;border-left:2px dashed #B5A88F}
+.form{position:sticky;top:96px}
+}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<noscript><style>.mostr{display:none}</style></noscript>
+</head>
+<body>
+<a class="skip" href="#fichero">Ir al fichero</a>
+<header class="bar">
+<div class="w">
+<a class="marca" href="#portada">Salón Marfil <span>Peluquería y barbería · Valencia</span></a>
+<p class="hoy" id="hoy" aria-live="polite">Horario de ejemplo: M–V 9:30–20:00 · S 9:00–14:00</p>
+<a class="btn" href="#libreta">Pedir cita</a>
+</div>
+</header>
+<nav class="idx" aria-label="Ir a una sección"><ul>
+<li><a href="#fichero">Servicios</a></li>
+<li><a href="#tiempos">Lo que tarda</a></li>
+<li><a href="#libreta">Pedir cita</a></li>
+<li><a href="#salon">El salón</a></li>
+<li><a href="#web-asi">Tu web</a></li>
+</ul></nav>
+<noscript><p>Sin JavaScript ves la ficha del primer servicio y la lista completa con tiempos y precios de ejemplo. La libreta de citas necesita JavaScript.</p></noscript>
+<main>
+<section class="port" id="portada" aria-labelledby="t1">
+<div class="w">
+<div class="cab">
+<div>
+<h1 id="t1">Cada corte tiene <em>su ficha.</em></h1>
+<p>Saca la ficha de lo que vienes a hacerte: cuánto estás en el sillón, cuánto cuesta, a qué hora sales y cada cuánto vuelves. Luego la apuntas en la libreta.</p>
+</div>
+<figure class="foto"><img src="img/hero.webp" width="600" height="750" fetchpriority="high" decoding="async" alt="Mano de un peluquero sujetando con el peine un mechón de pelo oscuro"><figcaption>Foto de stock, en blanco y negro cálido.</figcaption></figure>
+</div>
+<div class="cajon" id="fichero">
+<p class="placa">Fichero · 6 servicios</p>
+<div class="tabs" role="tablist" aria-label="Fichas de servicios" id="tabs">
+<button class="tab" role="tab" id="tab-0" aria-selected="true" aria-controls="ficha">Corte de caballero<small>30 min</small></button>
+<button class="tab" role="tab" id="tab-1" aria-selected="false" aria-controls="ficha" tabindex="-1">Degradado<small>45 min</small></button>
+<button class="tab" role="tab" id="tab-2" aria-selected="false" aria-controls="ficha" tabindex="-1">Corte y barba<small>1 h</small></button>
+<button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="ficha" tabindex="-1">Afeitado a navaja<small>45 min</small></button>
+<button class="tab" role="tab" id="tab-4" aria-selected="false" aria-controls="ficha" tabindex="-1">Cubrir canas<small>45 min</small></button>
+<button class="tab" role="tab" id="tab-5" aria-selected="false" aria-controls="ficha" tabindex="-1">Corte y secado<small>45 min</small></button>
+</div>
+<div class="ficha" id="ficha" role="tabpanel" aria-labelledby="tab-0">
+<div class="fh cap"><span>Ficha técnica · Salón Marfil</span><span class="mono" id="f-n">Nº 01</span></div>
+<span class="sello cap" aria-hidden="true">Ejemplo</span>
+<h2 class="ft" id="f-t">Corte de caballero</h2>
+<div class="cols">
+<div>
+<dl>
+<div class="fila"><dt class="cap">Incluye</dt><dd id="f-i">Lavado, corte a tijera y máquina, acabado.</dd></div>
+<div class="fila"><dt class="cap">En el sillón</dt><dd class="mono" id="f-d">30 min</dd></div>
+<div class="fila"><dt class="cap">Precio</dt><dd class="mono" id="f-p"><span class="ej">Ej.</span> 16 €</dd></div>
+<div class="fila"><dt class="cap">Vuelves cada</dt><dd class="mono" id="f-v">3–4 semanas</dd></div>
+<div class="fila"><dt class="cap">Técnica</dt><dd id="f-f">Tijera sobre peine arriba, máquina del 3 en laterales.</dd></div>
+</dl>
+</div>
+<div>
+<p class="lbl cap">Tu tiempo, minuto a minuto</p>
+<div class="tira" id="f-tira" role="img" aria-label="Lavado 5 min, corte 20 min, acabado 5 min"><span class="kl" style="flex-grow:5"></span><span class="kc" style="flex-grow:20"></span><span class="ks" style="flex-grow:5"></span></div>
+<ul class="ley" id="f-ley"><li><i class="kl"></i>Lavado <span class="mono">5</span></li><li><i class="kc"></i>Corte <span class="mono">20</span></li><li><i class="ks"></i>Acabado <span class="mono">5</span></li></ul>
+<div class="sal"><label for="f-hora">Si entras a las</label><select id="f-hora"><option>9:30</option><option selected>10:00</option><option>11:00</option><option>12:00</option><option>16:00</option><option>17:30</option><option>19:00</option></select><span>sales a las</span><output id="f-sal" for="f-hora">10:30</output></div>
+<p class="lbl cap" id="l-anio">Tus visitas en un año</p>
+<ol class="anio" id="f-anio" aria-labelledby="l-anio"><li class="v">E</li><li class="v">F</li><li class="v">M</li><li class="v">A</li><li class="v">M</li><li class="v">J</li><li class="v">J</li><li class="v">A</li><li class="v">S</li><li class="v">O</li><li class="v">N</li><li class="v">D</li></ol>
+<p class="nota" id="f-cnt">Unas 15 visitas al año (orientativo).</p>
+</div>
+</div>
+<div class="fpie">
+<a class="btn os" href="#libreta">Pedir cita con este servicio</a>
+<p class="nota">Tiempos, técnica y frecuencia orientativos; precios de ejemplo. Tu profesional los ajusta con tu pelo delante.</p>
+</div>
+</div>
+<div class="frente" aria-hidden="true"><span class="asa"></span></div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="tiempos" aria-labelledby="t2">
+<div class="w">
+<h2 id="t2">Lo que tarda cada cosa.</h2>
+<p class="ld">Todas las fichas en la misma regla de dos horas. Las rayas son espera: exposición del color o toalla caliente; estás sentado sin que nadie te toque el pelo.</p>
+<div class="eje" aria-hidden="true"><span>Regla de 2 h, marcas cada 30 min</span></div>
+<ul class="cmp" id="cmp">
+<li><div><b>Corte de caballero</b><div class="dat"><span class="mono">30 min</span><span><span class="ej">Ej.</span> 16 €</span><span>cada 3–4 sem.</span></div></div><div class="pista"><div class="tira" style="--w:25%"><span class="kl" style="flex-grow:5"></span><span class="kc" style="flex-grow:20"></span><span class="ks" style="flex-grow:5"></span></div></div><button type="button" data-i="0">Ver ficha</button></li>
+<li><div><b>Degradado</b><div class="dat"><span class="mono">45 min</span><span><span class="ej">Ej.</span> 18 €</span><span>cada 2–3 sem.</span></div></div><div class="pista"><div class="tira" style="--w:37.5%"><span class="kl" style="flex-grow:5"></span><span class="kc" style="flex-grow:35"></span><span class="ks" style="flex-grow:5"></span></div></div><button type="button" data-i="1">Ver ficha</button></li>
+<li><div><b>Corte y barba</b><div class="dat"><span class="mono">1 h</span><span><span class="ej">Ej.</span> 26 €</span><span>cada 3–4 sem.</span></div></div><div class="pista"><div class="tira" style="--w:50%"><span class="kl" style="flex-grow:5"></span><span class="kc" style="flex-grow:25"></span><span class="ke" style="flex-grow:10"></span><span class="kc" style="flex-grow:15"></span><span class="ks" style="flex-grow:5"></span></div></div><button type="button" data-i="2">Ver ficha</button></li>
+<li><div><b>Afeitado a navaja</b><div class="dat"><span class="mono">45 min</span><span><span class="ej">Ej.</span> 20 €</span><span>cuando quieras</span></div></div><div class="pista"><div class="tira" style="--w:37.5%"><span class="ke" style="flex-grow:10"></span><span class="ka" style="flex-grow:5"></span><span class="kc" style="flex-grow:20"></span><span class="ks" style="flex-grow:10"></span></div></div><button type="button" data-i="3">Ver ficha</button></li>
+<li><div><b>Cubrir canas</b><div class="dat"><span class="mono">45 min</span><span><span class="ej">Ej.</span> 22 €</span><span>cada 3–4 sem.</span></div></div><div class="pista"><div class="tira" style="--w:37.5%"><span class="ka" style="flex-grow:10"></span><span class="ke" style="flex-grow:15"></span><span class="kl" style="flex-grow:10"></span><span class="ks" style="flex-grow:10"></span></div></div><button type="button" data-i="4">Ver ficha</button></li>
+<li><div><b>Corte y secado</b><div class="dat"><span class="mono">45 min</span><span><span class="ej">Ej.</span> 24 €</span><span>cada 6–8 sem.</span></div></div><div class="pista"><div class="tira" style="--w:37.5%"><span class="kl" style="flex-grow:10"></span><span class="kc" style="flex-grow:25"></span><span class="ks" style="flex-grow:10"></span></div></div><button type="button" data-i="5">Ver ficha</button></li>
+</ul>
+<ul class="ley"><li><i class="ka"></i>Aplicación</li><li><i class="ke"></i>Espera (exposición, toalla)</li><li><i class="kl"></i>Lavado</li><li><i class="kc"></i>Corte, navaja o perfilado</li><li><i class="ks"></i>Secado y acabado</li></ul>
+<p class="nota">Regla: el ancho completo son 2 horas. Precios de ejemplo; tiempos orientativos según largo y cantidad de pelo.</p>
+</div>
+</section>
+
+<section class="lib" id="libreta" aria-labelledby="t3">
+<div class="w">
+<h2 id="t3">La libreta de citas.</h2>
+<p class="ld">Tu servicio ocupa en la libreta lo que dura de verdad. Elige día y toca la hora de entrada: si no cabe antes del cierre o choca con otra cita, te lo decimos.</p>
+<div class="dias" id="dias" role="group" aria-label="Días (disponibilidad de ejemplo)"></div>
+<div class="mostr">
+<div class="libro">
+<div class="pag">
+<div class="ph cap"><span id="l-dia">Elige un día</span><span>Disponibilidad de ejemplo</span></div>
+<ol class="horas" id="horas" aria-label="Horas del día"></ol>
+</div>
+<div class="pag">
+<div class="ph cap"><span>Tu cita</span><span>Demo</span></div>
+<form class="form" id="form" novalidate>
+<label class="cap" for="c-look">Servicio</label>
+<select id="c-look"></select>
+<div class="res" id="res" aria-live="polite">Aún no has elegido hora.</div>
+<label class="cap" for="c-nom">Nombre</label>
+<input id="c-nom" autocomplete="given-name" required>
+<label class="cap" for="c-tel">Teléfono</label>
+<input id="c-tel" type="tel" inputmode="tel" autocomplete="tel" required>
+<p class="err" id="err" aria-live="assertive"></p>
+<button class="btn os" type="submit" id="c-env" disabled>Apuntar en la libreta</button>
+<p class="nota">Es una demo: este formulario no envía nada a nadie.</p>
+<div class="ok" id="ok" hidden tabindex="-1"><b class="cap">DEMO · no se ha enviado nada</b><span id="ok-t"></span></div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="sec" id="salon" aria-labelledby="t4">
+<div class="w">
+<h2 id="t4">El salón.</h2>
+<div class="salon">
+<figure><img src="img/salon.webp" width="640" height="800" loading="lazy" decoding="async" alt="Interior de una peluquería con sillones negros, lavacabezas y lámparas colgantes"><figcaption>Foto de stock de ejemplo, no es el salón.</figcaption></figure>
+<div class="datos">
+<div>
+<h3>Horario</h3>
+<table class="hor"><caption>Horario de ejemplo.</caption>
+<tr><th scope="row">Lunes</th><td>Cerrado</td></tr>
+<tr><th scope="row">Martes a viernes</th><td>9:30–20:00</td></tr>
+<tr><th scope="row">Sábado</th><td>9:00–14:00</td></tr>
+<tr><th scope="row">Domingo</th><td>Cerrado</td></tr>
+</table>
+</div>
+<div>
+<h3>Dónde</h3>
+<p>Calle de Ejemplo, 12<br>46000 Valencia</p>
+<p class="nota">Dirección de ejemplo.</p>
+<p style="margin-top:14px">Teléfono: <span class="mono">000 000 000</span></p>
+<p class="nota">Teléfono de ejemplo.</p>
+</div>
+<div>
+<h3>Antes de venir</h3>
+<ul class="antes">
+<li><b>Trae una foto de lo que quieres.</b>La miramos con tu pelo delante y te decimos qué es posible y cuánto llevaría.</li>
+<li><b>Si te has teñido en casa, dilo.</b>Cambia el producto y el tiempo de exposición.</li>
+<li><b>Si no puedes venir, avisa.</b>Así otra persona aprovecha el hueco (política de ejemplo).</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="mw" id="web-asi" aria-labelledby="mw-t">
+<div class="w">
+<h2 id="mw-t">¿Quieres una web así para tu negocio?</h2>
+<p>La hacemos con tus servicios, tus precios, tu horario y tus reservas. Escríbenos y te contamos cómo sería.</p>
+<a class="btn" href="mailto:mesawebstudio@gmail.com">mesawebstudio@gmail.com</a>
+</div>
+</section>
+</main>
+<footer>
+<div class="w">
+<p><strong>Demo de MesaWeb Studio · negocio ficticio</strong></p>
+<p>Salón Marfil no existe: nombre, datos, precios y disponibilidad son de ejemplo.</p>
+<p>Las personas de las fotos son de stock; no son clientes ni equipo del negocio.</p>
+<p>Fotos: cottonbro studio, mths, Deni Priyo y artbovich, vía Pexels (licencia Pexels, uso libre). Aquí, en blanco y negro cálido.</p>
+</div>
+</footer>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var K={a:['ka','Aplicación'],e:['ke','Espera'],l:['kl','Lavado'],c:['kc','Corte'],s:['ks','Acabado']};
+var L=[
+{n:'Corte de caballero',i:'Lavado, corte a tijera y máquina, acabado.',m:30,p:'16 €',v:[3,4],f:'Tijera sobre peine arriba, máquina del 3 en laterales.',s:[['l',5],['c',20],['s',5]]},
+{n:'Degradado',i:'Lavado, degradado a máquina, repaso a navaja y acabado.',m:45,p:'18 €',v:[2,3],f:'Ejemplo: del 0 al 2 en laterales, transición a mano y navaja en el contorno.',s:[['l',5],['c',35],['s',5]]},
+{n:'Corte y barba',i:'Corte, toalla caliente y perfilado de barba.',m:60,p:'26 €',v:[3,4],f:'Barba a tijera y máquina; perfil con navaja y aceite.',s:[['l',5],['c',25],['e',10,'Toalla caliente'],['c',15,'Perfilado de barba'],['s',5]]},
+{n:'Afeitado a navaja',i:'Toalla caliente, espuma, navaja, toalla fría y bálsamo.',m:45,p:'20 €',v:null,f:'Dos pasadas: a favor y a contrapelo solo si tu piel lo permite.',s:[['e',10,'Toalla caliente'],['a',5,'Espuma'],['c',20,'Navaja'],['s',10,'Toalla fría y bálsamo']]},
+{n:'Cubrir canas',i:'Color en canas, exposición corta, lavado y secado.',m:45,p:'22 €',v:[3,4],f:'Ejemplo: tono según tu base, exposición 15 min; se decide con tu pelo delante.',s:[['a',10],['e',15,'Exposición'],['l',10],['s',10]]},
+{n:'Corte y secado',i:'Lavado, corte y secado con cepillo.',m:45,p:'24 €',v:[6,8],f:'Tijera y navaja; secado con cepillo redondo.',s:[['l',10],['c',25],['s',10]]}];
+var MES='EFMAMJJASOND',MN=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],cur=0,tabs=[].slice.call(document.querySelectorAll('.tab')),ficha=$('ficha'),cmp=[].slice.call(document.querySelectorAll('#cmp li')),sel={d:null,h:null};
+function dur(m){var h=Math.floor(m/60),r=m%60;return h?h+' h'+(r?' '+r:''):m+' min'}
+function hm(t){return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
+function aMin(s){var p=s.split(':');return +p[0]*60+ +p[1]}
+function salida(){$('f-sal').textContent=hm(aMin($('f-hora').value)+L[cur].m)}
+function pon(i,anim){
+cur=i;var d=L[i];
+tabs.forEach(function(t,j){var on=j===i;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1});
+ficha.setAttribute('aria-labelledby','tab-'+i);
+$('f-n').textContent='Nº 0'+(i+1);$('f-t').textContent=d.n;$('f-i').textContent=d.i;$('f-d').textContent=dur(d.m);
+$('f-p').innerHTML='<span class="ej">Ej.</span> '+d.p;$('f-v').textContent=d.v?d.v[0]+'–'+d.v[1]+' semanas':'Cuando quieras; no hay ritmo fijo';$('f-f').textContent=d.f;
+var t='',l='',a=[];d.s.forEach(function(x){var nm=x[2]||K[x[0]][1];t+='<span class="'+K[x[0]][0]+'" style="flex-grow:'+x[1]+'"></span>';l+='<li><i class="'+K[x[0]][0]+'"></i>'+nm+' <span class="mono">'+x[1]+'</span></li>';a.push(nm+' '+x[1]+' min')});
+$('f-tira').innerHTML=t;$('f-tira').setAttribute('aria-label',a.join(', '));$('f-ley').innerHTML=l;salida();
+var now=new Date().getMonth(),an='',n=0,vis={};
+if(d.v){var w=(d.v[0]+d.v[1])/2;for(var k=0;k*w<52;k++){vis[Math.floor(k*w/4.345)]=1;n++}}
+for(var m=0;m<12;m++){var on=d.v&&vis[m];an+='<li'+(on?' class="v"':'')+'><span aria-hidden="true">'+MES[(now+m)%12]+'</span><span class="vh">'+MN[(now+m)%12]+(on?': visita':': sin visita')+'</span></li>'}
+$('f-anio').innerHTML=an;$('f-cnt').textContent=d.v?'Unas '+n+' visitas al año (orientativo).':'Es un servicio para cuando te apetezca: no hay visitas fijas.';
+cmp.forEach(function(li,j){li.classList.toggle('on',j===i)});
+$('c-look').value=i;$('ok').hidden=true;
+if(sel.h!=null){if(libre(sel.h)){sel.h=null;huecos();$('res').textContent='Con este servicio ya no cabe a esa hora: elige otra.'}else marca()}
+if(anim){ficha.classList.remove('sale');void ficha.offsetWidth;ficha.classList.add('sale')}
+}
+tabs.forEach(function(t,j){t.addEventListener('click',function(){pon(j,1)});t.addEventListener('keydown',function(e){var k=e.key,n=null;if(k==='ArrowRight'||k==='ArrowDown')n=(j+1)%6;else if(k==='ArrowLeft'||k==='ArrowUp')n=(j+5)%6;else if(k==='Home')n=0;else if(k==='End')n=5;if(n!=null){e.preventDefault();pon(n,1);tabs[n].focus()}})});
+$('f-hora').addEventListener('change',salida);
+cmp.forEach(function(li){li.querySelector('button').addEventListener('click',function(){pon(+this.dataset.i,1);$('fichero').scrollIntoView();tabs[cur].focus({preventScroll:true})})});
+var HOR={2:[570,1200],3:[570,1200],4:[570,1200],5:[570,1200],6:[540,840]},DN=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'],DC=['dom','lun','mar','mié','jue','vie','sáb'];
+function madrid(){try{var p={};new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value});return{f:new Date(+p.year,+p.month-1,+p.day),min:+p.hour*60+ +p.minute}}catch(e){var d=new Date();return{f:new Date(d.getFullYear(),d.getMonth(),d.getDate()),min:d.getHours()*60+d.getMinutes()}}}
+var M=madrid();
+(function(){var w=M.f.getDay(),h=HOR[w],t;
+if(h&&M.min>=h[0]&&M.min<h[1])t='Hoy <b>abierto hasta las '+hm(h[1])+'</b>';
+else if(h&&M.min<h[0])t='Hoy <b>abre a las '+hm(h[0])+'</b>';
+else{for(var k=1;k<8;k++){var x=(w+k)%7;if(HOR[x]){t='Ahora <b>cerrado</b> · abre el '+DN[x]+' a las '+hm(HOR[x][0]);break}}}
+$('hoy').innerHTML=t+' <span class="hx">· horario de ejemplo, hora de Madrid</span><span class="hm">(horario de ejemplo)</span>'})();
+var dias=[];for(var k=0;k<7;k++)dias.push(new Date(M.f.getFullYear(),M.f.getMonth(),M.f.getDate()+k));
+function oc(f,t){return (f.getDate()*7+t/30*13+f.getMonth()*3)%11<4}
+var db='';dias.forEach(function(f,j){var h=HOR[f.getDay()],dis=!h||(j===0&&M.min>=h[1]-30);db+='<button type="button" class="dia" aria-pressed="false"'+(dis?' disabled':'')+'>'+(j===0?'Hoy':j===1?'Mañana':DC[f.getDay()])+'<small>'+f.getDate()+'/'+(f.getMonth()+1)+'</small>'+(dis?'<span class="vh">, '+(h?'sin horas libres':'cerrado')+'</span>':'')+'</button>'});
+$('dias').innerHTML=db;var bdias=[].slice.call(document.querySelectorAll('.dia'));
+var opt='';L.forEach(function(d,i){opt+='<option value="'+i+'">'+d.n+' · '+dur(d.m)+'</option>'});$('c-look').innerHTML=opt;
+function huecos(){var f=dias[sel.d],h=HOR[f.getDay()],out='';
+$('l-dia').textContent=DN[f.getDay()]+' '+f.getDate()+'/'+(f.getMonth()+1);
+for(var t=h[0];t<h[1];t+=30){var pas=sel.d===0&&t<=M.min,o=!pas&&oc(f,t);out+='<li><time>'+hm(t)+'</time><button type="button" class="hueco'+(o?' oc':'')+(pas?' pa':'')+'" data-t="'+t+'"'+(o||pas?' aria-disabled="true"':'')+'>'+(o?'ocupado (ejemplo)':pas?'ya ha pasado':'libre')+'</button></li>'}
+$('horas').innerHTML=out}
+function libre(t){var f=dias[sel.d],h=HOR[f.getDay()],fin=t+L[cur].m;if(fin>h[1])return'no cabe antes del cierre ('+hm(h[1])+')';for(var x=t;x<fin;x+=30){if(oc(f,x)||(sel.d===0&&x<=M.min))return'choca con otra cita a las '+hm(x)}return''}
+function marca(){var fin=sel.h+L[cur].m;
+[].slice.call(document.querySelectorAll('.hueco')).forEach(function(b){var t=+b.dataset.t,o=b.classList.contains('oc'),pa=b.classList.contains('pa');b.classList.remove('sel','cont');b.removeAttribute('aria-current');b.textContent=o?'ocupado (ejemplo)':pa?'ya ha pasado':'libre';
+if(t>=sel.h&&t<fin){b.classList.add('sel');if(t===sel.h){b.textContent=L[cur].n+' · hasta las '+hm(fin);b.setAttribute('aria-current','true')}else{b.classList.add('cont');b.textContent='sigue tu cita'}}});
+$('res').textContent=L[cur].n+' · '+$('l-dia').textContent+' · de '+hm(sel.h)+' a '+hm(fin)+' · Ej. '+L[cur].p}
+function eligeDia(j){sel.d=j;sel.h=null;bdias.forEach(function(b,i){b.setAttribute('aria-pressed',i===j)});huecos();$('res').textContent='Aún no has elegido hora.';$('err').textContent=''}
+bdias.forEach(function(b,j){b.addEventListener('click',function(){eligeDia(j)})});
+$('horas').addEventListener('click',function(e){var b=e.target.closest('.hueco');if(!b)return;var t=+b.dataset.t;
+if(b.getAttribute('aria-disabled')){$('err').textContent='Esa hora está ocupada o ya ha pasado. Prueba otra.';return}
+var m=libre(t);if(m){$('err').textContent=L[cur].n+' dura '+dur(L[cur].m)+': a las '+hm(t)+' '+m+'. Prueba más temprano u otro día.';return}
+$('err').textContent='';sel.h=t;marca()});
+$('c-look').addEventListener('change',function(){pon(+this.value,0)});
+for(var j=0;j<dias.length;j++){if(!bdias[j].disabled){eligeDia(j);break}}
+$('form').addEventListener('submit',function(e){e.preventDefault();var er='';
+if(sel.h==null)er='Toca una hora libre en la libreta.';else if(!$('c-nom').value.trim())er='Escribe tu nombre.';else if($('c-tel').value.replace(/\D/g,'').length<9)er='Escribe un teléfono de 9 cifras.';
+$('err').textContent=er;if(er)return;
+$('ok-t').textContent='Así quedaría apuntada: '+$('res').textContent+', a nombre de '+$('c-nom').value.trim()+'. En la web real, el salón la recibiría y te confirmaría.';$('ok').hidden=false;$('ok').focus()});
+$('c-env').disabled=false;
+pon(0,0);
+})();
+</script>
+<script>
+(function(){var l=[].slice.call(document.querySelectorAll('.idx a'));if(!('IntersectionObserver' in window))return;
+var m={};l.forEach(function(a){var t=document.getElementById(a.getAttribute('href').slice(1));if(t)m[t.id]=a});
+var o=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){l.forEach(function(a){a.removeAttribute('aria-current')});m[x.target.id].setAttribute('aria-current','true');var a=m[x.target.id],u=a.parentNode.parentNode;if(u.scrollWidth>u.clientWidth)u.scrollLeft=a.offsetLeft-16}})},{rootMargin:'-30% 0px -60% 0px'});
+Object.keys(m).forEach(function(k){o.observe(document.getElementById(k))})})();
+</script>
+</body>
+</html>
