@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Estética Alba · Centro de estética en Sevilla (demo)</title>
+<meta name="description" content="Demo de MesaWeb Studio: web de un centro de estética ficticio en Sevilla. Servicios, proceso, preguntas frecuentes y cita, con precios de ejemplo.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#FFF5EE">
+<link rel="icon" href="data:,">
+<meta property="og:title" content="Estética Alba · Centro de estética en Sevilla (demo)">
+<meta property="og:description" content="Demo de MesaWeb Studio. Negocio ficticio, datos y precios de ejemplo.">
+<meta property="og:type" content="website">
+<style>
+:root{--bg:#FFF5EE;--alt:#F7E7CE;--sand:#F2CC8F;--clay:#E5C29F;--ink:#6B3E2E;--txt:#3E2318;--sans:"Segoe UI Variable Display","Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;--h:72px}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--h) + 16px);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 1rem/1.7 var(--sans)}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p,ul,ol{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:6px}
+.w{max-width:1160px;margin-inline:auto;padding-inline:20px}
+.eye{font:600 .8125rem/1.4 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.big{font:300 clamp(2.5rem,1.2rem + 5.6vw,5.5rem)/1.12 var(--sans);letter-spacing:-.02em;color:var(--ink);text-wrap:balance}
+h2.big{font-size:clamp(2.25rem,1.3rem + 4vw,4.5rem)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:10px 28px;border:2px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--bg);font:600 1rem/1.2 var(--sans);text-decoration:none;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.line{background:transparent;color:var(--ink)}
+.btn.line:hover{background:var(--ink);color:var(--bg)}
+header{position:fixed;inset:0 0 auto 0;z-index:10;background:rgba(255,245,238,.96);border-bottom:1px solid var(--clay)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px}
+.logo{font:300 1.5rem/1 var(--sans);letter-spacing:.02em;color:var(--ink);text-decoration:none;white-space:nowrap}
+.logo b{font-weight:600}
+nav ul{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav ul::-webkit-scrollbar{display:none}
+nav a{display:flex;align-items:center;min-height:44px;padding:0 14px;font:500 .9375rem/1 var(--sans);color:var(--txt);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
+nav a:hover,nav a[aria-current]{color:var(--ink);border-bottom-color:var(--ink)}
+header .btn{min-height:44px;padding:6px 20px;font-size:.9375rem}
+main{padding-top:var(--h)}
+section{padding-block:clamp(56px,9vw,112px)}
+.hero{display:grid;gap:36px;align-items:center;padding-top:clamp(32px,6vw,72px)}
+.hero p.lead{font-size:1.1875rem;max-width:34ch;margin-block:24px 32px}
+.hero img{border-radius:28px;width:100%;max-width:460px;aspect-ratio:640/928;object-fit:cover;justify-self:center}
+.about{background:var(--alt)}
+.about .w{display:grid;gap:32px;align-items:center}
+.about img{border-radius:28px;width:100%;max-width:420px;aspect-ratio:4/5;object-fit:cover;justify-self:center}
+.about p{max-width:52ch}
+.about p+p{margin-top:16px}
+.head{max-width:58ch;margin-bottom:40px}
+.head p{margin-top:16px}
+.cards{display:grid;gap:36px 24px}
+.card img{border-radius:20px;width:100%;aspect-ratio:1;object-fit:cover;margin-bottom:18px}
+.card h3{font:600 1rem/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.card p{margin-bottom:12px}
+details.more summary{display:inline-flex;align-items:center;min-height:44px;padding:0 22px;border:2px solid var(--ink);border-radius:999px;font:600 .9375rem/1 var(--sans);color:var(--ink);cursor:pointer;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary:hover,details.more[open] summary{background:var(--ink);color:var(--bg)}
+details.more ul{margin-top:14px;border-top:1px solid var(--clay)}
+details.more li{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--clay);font-size:.9375rem}
+details.more li span:last-child{white-space:nowrap;font-weight:600;color:var(--ink)}
+.nota{font-size:.875rem;margin-top:28px;color:var(--txt)}
+.proc{background:var(--sand)}
+.steps{display:grid;gap:32px 28px;counter-reset:s}
+.steps li{padding-top:16px;border-top:2px solid var(--ink)}
+.steps b{display:block;font:300 3rem/1 var(--sans);color:var(--ink);margin-bottom:12px}
+.steps h3{font:600 .9375rem/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+.faq{max-width:820px}
+.faq details{border-bottom:1px solid var(--clay)}
+.faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:14px 0;font:500 1.0625rem/1.4 var(--sans);cursor:pointer;list-style:none;color:var(--ink)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:300 1.75rem/1 var(--sans);flex:none}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{padding:0 0 20px;max-width:62ch}
+.contact{background:var(--alt)}
+.contact .w{display:grid;gap:36px}
+form{display:grid;gap:16px;max-width:520px}
+label{display:grid;gap:6px;font:600 .875rem/1.3 var(--sans);color:var(--ink)}
+input,select{min-height:48px;padding:0 16px;border:2px solid var(--ink);border-radius:14px;background:var(--bg);color:var(--txt);font:400 1rem var(--sans)}
+.msg{min-height:1.6em;font-weight:600;color:var(--ink)}
+.data li{padding-block:6px}
+.web{background:var(--ink);color:var(--bg)}
+.web h2{font:300 clamp(1.75rem,1.2rem + 2.4vw,2.75rem)/1.2 var(--sans);margin-bottom:12px}
+.web p{max-width:56ch;margin-bottom:24px}
+.web .btn{background:var(--sand);border-color:var(--sand);color:var(--ink)}
+.web .btn:hover{background:transparent;color:var(--sand)}
+.web :focus-visible{outline-color:var(--sand)}
+footer{padding-block:36px;font-size:.875rem}
+footer p+p{margin-top:6px}
+noscript p{background:var(--sand);padding:12px 20px;margin:0}
+@media (min-width:760px){
+:root{--h:64px}
+.top{min-height:64px}
+header .w{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px}
+header nav{justify-self:center}
+.hero{grid-template-columns:1.15fr .85fr}
+.about .w{grid-template-columns:.8fr 1.2fr;gap:64px}
+.cards{grid-template-columns:repeat(2,1fr)}
+.steps{grid-template-columns:repeat(4,1fr)}
+.contact .w{grid-template-columns:1.1fr .9fr}
+}
+@media (min-width:1040px){.cards{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:759px){
+:root{--h:104px}
+header .w{display:block;padding-inline:0}
+.top{padding-inline:20px}
+nav ul{padding-inline:12px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<noscript><p>Sin JavaScript la página se ve completa; solo el formulario de ejemplo necesita JavaScript.</p></noscript>
+<header>
+<div class="w">
+<div class="top"><a class="logo" href="#inicio" aria-label="Estética Alba, ir al inicio"><b>Estética</b> Alba</a><a class="btn hb" href="#contacta">Reserva ahora</a></div>
+<nav aria-label="Ir a una sección"><ul>
+<li><a href="#inicio">Inicio</a></li>
+<li><a href="#servicios">Servicios</a></li>
+<li><a href="#proceso">Proceso</a></li>
+<li><a href="#preguntas">Preguntas</a></li>
+<li><a href="#contacta">Contacta</a></li>
+</ul></nav>
+</div>
+</header>
+<main>
+<section id="inicio" class="hero w" aria-labelledby="t1">
+<div>
+<p class="eye">Centro de estética · Sevilla</p>
+<h1 id="t1" class="big">Cuidamos tu piel con tiempo y con calma.</h1>
+<p class="lead">Tratamientos pensados para respetar tu belleza natural y realzarla con equilibrio. Y con el precio a la vista desde el primer día.</p>
+<a class="btn" href="#contacta">Reserva ahora</a>
+</div>
+<img src="img/hero.webp" width="640" height="928" alt="Mujer envuelta en una toalla blanca junto a una ventana luminosa (foto de stock)">
+</section>
+
+<section class="about" aria-labelledby="t2">
+<div class="w">
+<img src="img/sobre.webp" width="560" height="700" loading="lazy" alt="Mujer con una toalla en la cabeza cuidándose la piel (foto de stock)">
+<div>
+<p class="eye">Quiénes somos</p>
+<h2 id="t2" class="big">Estética Alba</h2>
+<p style="margin-top:24px">Somos un centro pequeño en el barrio de Triana. Entendemos cada tratamiento como un proceso a medida: miramos tu piel, tus tiempos y lo que de verdad necesitas, y te lo explicamos antes de empezar.</p>
+<p>Nuestra filosofía es sencilla: pocas cosas, bien hechas y con calma. Sin prisas en la cabina y sin sorpresas en el precio.</p>
+</div>
+</div>
+</section>
+
+<section id="servicios" aria-labelledby="t3">
+<div class="w">
+<div class="head">
+<p class="eye">Nuestro trabajo</p>
+<h2 id="t3" class="big">Servicios</h2>
+<p>Cada piel tiene su ritmo. Por eso cada tratamiento se prepara de forma individual, y siempre sabes cuánto dura y desde cuánto cuesta.</p>
+</div>
+<div class="cards">
+<article class="card">
+<img src="img/facial.webp" width="600" height="600" loading="lazy" alt="Tratamiento facial con la clienta tumbada y los ojos cerrados (foto de stock)">
+<h3>Facial</h3>
+<p>Limpieza, hidratación y cuidados adaptados a tu tipo de piel.</p>
+<details class="more"><summary>Ver más</summary><ul>
+<li><span>Limpieza e hidratación · 60 min</span><span>desde Ej. 30 €</span></li>
+<li><span>Facial personalizado · 75 min</span><span>desde Ej. 45 €</span></li>
+</ul></details>
+</article>
+<article class="card">
+<img src="img/cejas.webp" width="600" height="600" loading="lazy" alt="Perfilado de ceja con pinzas sobre un rostro en primer plano (foto de stock)">
+<h3>Cejas y pestañas</h3>
+<p>Diseño y perfilado que respetan la forma natural de tu mirada.</p>
+<details class="more"><summary>Ver más</summary><ul>
+<li><span>Diseño y perfilado · 30 min</span><span>desde Ej. 12 €</span></li>
+<li><span>Lifting de pestañas · 60 min</span><span>desde Ej. 38 €</span></li>
+</ul></details>
+</article>
+<article class="card">
+<img src="img/manos.webp" width="600" height="600" loading="lazy" alt="Manos con uñas en tono nude durante una manicura (foto de stock)">
+<h3>Manos y pies</h3>
+<p>Manicura y pedicura con acabados naturales y duraderos.</p>
+<details class="more"><summary>Ver más</summary><ul>
+<li><span>Manicura · 45 min</span><span>desde Ej. 18 €</span></li>
+<li><span>Pedicura · 60 min</span><span>desde Ej. 28 €</span></li>
+</ul></details>
+</article>
+<article class="card">
+<img src="img/corporal.webp" width="600" height="600" loading="lazy" alt="Masaje de espalda con las manos del terapeuta (foto de stock)">
+<h3>Corporal</h3>
+<p>Masajes y cuidados para soltar la semana, sin prisas.</p>
+<details class="more"><summary>Ver más</summary><ul>
+<li><span>Masaje relajante · 50 min</span><span>desde Ej. 32 €</span></li>
+<li><span>Exfoliación corporal · 40 min</span><span>desde Ej. 26 €</span></li>
+</ul></details>
+</article>
+</div>
+<p class="nota">Precios y duraciones de ejemplo: en una web real serían los tuyos y se cambian en un minuto.</p>
+</div>
+</section>
+
+<section id="proceso" class="proc" aria-labelledby="t4">
+<div class="w">
+<div class="head">
+<p class="eye">Paso a paso</p>
+<h2 id="t4" class="big">El proceso</h2>
+</div>
+<ol class="steps">
+<li><b>01</b><h3>Valoración</h3><p>Hablamos de lo que buscas y miramos tu piel antes de proponerte nada.</p></li>
+<li><b>02</b><h3>El tratamiento</h3><p>Lo hacemos con calma, explicándote cada paso y con productos de calidad.</p></li>
+<li><b>03</b><h3>Cuidados posteriores</h3><p>Te damos indicaciones claras para cuidarte en casa después de la sesión.</p></li>
+<li><b>04</b><h3>Seguimiento</h3><p>Te decimos cada cuánto conviene repetir, de forma orientativa y sin compromiso.</p></li>
+</ol>
+</div>
+</section>
+
+<section id="preguntas" aria-labelledby="t5">
+<div class="w">
+<div class="head">
+<p class="eye">¿Aún dudas?</p>
+<h2 id="t5" class="big">Preguntas frecuentes</h2>
+</div>
+<div class="faq">
+<details><summary>¿Cuánto dura cada sesión?</summary><p>Depende del tratamiento: entre 30 y 75 minutos. Cada servicio indica su duración orientativa antes de reservar.</p></details>
+<details><summary>¿Qué tengo que hacer antes de venir?</summary><p>Normalmente nada especial. Si tienes la piel sensible o sigues algún tratamiento, cuéntanoslo al reservar y lo tenemos en cuenta.</p></details>
+<details><summary>¿Cada cuánto conviene repetir?</summary><p>Depende de cada persona y de cada tratamiento. En la valoración te damos una frecuencia orientativa.</p></details>
+<details><summary>¿Puedo cambiar o anular la cita?</summary><p>Sí. Avísanos con algo de antelación y buscamos otro hueco.</p></details>
+<details><summary>¿Hay que pagar algo al reservar?</summary><p>En esta demo no se envía ni se cobra nada. En una web real, cada centro decide cómo gestionar sus reservas.</p></details>
+<details><summary>¿Con qué productos trabajáis?</summary><p>Con marcas profesionales de cosmética. Si tienes alguna alergia, avísanos antes de empezar.</p></details>
+</div>
+</div>
+</section>
+
+<section id="contacta" class="contact" aria-labelledby="t6">
+<div class="w">
+<div>
+<p class="eye">Contacta</p>
+<h2 id="t6" class="big">Pregúntanos lo que necesites</h2>
+<ul class="data" style="margin-top:28px">
+<li>Calle de Ejemplo, 12 · Sevilla <em>(dirección de ejemplo)</em></li>
+<li>000 000 000 <em>(teléfono de ejemplo)</em></li>
+<li>Lunes a viernes, 10:00 a 20:00 <em>(horario de ejemplo)</em></li>
+</ul>
+</div>
+<form id="f" novalidate>
+<p class="eye">Reserva ya</p>
+<label>Tu nombre<input name="n" autocomplete="name" required></label>
+<label>Tratamiento<select name="t"><option>Facial</option><option>Cejas y pestañas</option><option>Manos y pies</option><option>Corporal</option></select></label>
+<label>Cuándo te viene mejor<select name="d"><option>Esta semana</option><option>La próxima semana</option><option>Más adelante</option></select></label>
+<button class="btn" type="submit">Pedir cita</button>
+<p class="msg" id="m" role="status" aria-live="polite"></p>
+<p style="font-size:.875rem">Es una demo: no se envía nada y la disponibilidad es de ejemplo.</p>
+</form>
+</div>
+</section>
+
+<section class="web" aria-labelledby="mw">
+<div class="w">
+<h2 id="mw">¿Quieres una web así para tu negocio?</h2>
+<p>La hacemos con tus servicios, tus precios, tu horario y tus reservas. Escríbenos y te contamos cómo sería.</p>
+<a class="btn" href="mailto:mesawebstudio@gmail.com">mesawebstudio@gmail.com</a>
+</div>
+</section>
+</main>
+<footer>
+<div class="w">
+<p><strong>Demo de MesaWeb Studio · negocio ficticio</strong></p>
+<p>Estética Alba no existe: nombre, datos, precios y disponibilidad son de ejemplo.</p>
+<p>Las personas de las fotos son de stock; no son clientes ni equipo del negocio.</p>
+<p>Fotos de Pexels (licencia Pexels): KoolShooters (portada), Katrin Bolovtsova (quiénes somos), Gustavo Fring (facial), Antoni Shkraba (cejas), Melih Can (manos) y Stephanie Allen (corporal).</p>
+</div>
+</footer>
+<script>
+(function(){
+var f=document.getElementById('f'),m=document.getElementById('m');
+f.addEventListener('submit',function(e){e.preventDefault();var n=f.n.value.trim();
+if(!n){m.textContent='Escribe tu nombre para ver cómo quedaría.';f.n.focus();return}
+m.textContent='DEMO · no se ha enviado nada. Con tu web real, esta solicitud te llegaría al momento.'});
+if(!('IntersectionObserver' in window))return;
+var l=[].slice.call(document.querySelectorAll('nav a')),map={};
+l.forEach(function(a){var t=document.getElementById(a.getAttribute('href').slice(1));if(t)map[t.id]=a});
+var o=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){l.forEach(function(a){a.removeAttribute('aria-current')});var a=map[x.target.id];a.setAttribute('aria-current','true');var u=a.parentNode.parentNode;if(u.scrollWidth>u.clientWidth)u.scrollLeft=a.offsetLeft-16}})},{rootMargin:'-30% 0px -60% 0px'});
+Object.keys(map).forEach(function(k){o.observe(document.getElementById(k))});
+})();
+</script>
+</body>
+</html>
